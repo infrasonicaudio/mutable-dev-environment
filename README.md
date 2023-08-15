@@ -17,6 +17,8 @@ The Extension pack consists of a file with the `vbox-extpack` extension.  On win
 
     VBoxManage extpack install <filename>
 
+_2023 Note: You can just double click the file to install on macOS_
+
 Finally if you are running a Linux operating system you will want to add your user to the `vboxusers` group so that the virtual machine can access your USB devices.  Run the following command:
 
     sudo usermod -a -G vboxusers $USER
@@ -25,23 +27,29 @@ Then **log out and log back in** to make sure the group change takes effect.
 
 ## Usage
 
+**INSTRUCTIONS UPDATED FOR 2023 MODERN TOOLCHAIN**
+
 First, clone this repository:
 
-	git clone https://github.com/pichenettes/mutable-dev-environment.git
-
-or download: 
-
-	https://github.com/pichenettes/mutable-dev-environment/archive/master.zip
+    git clone -b modern https://github.com/infrasonicaudio/mutable-dev-environment.git
 
 To start the VM, open a terminal in the `mutable-dev-environment` directory with the Vagrantfile and run:
 
     vagrant up
+
+_NOTE:_ If you are on macOS and using Virtualbox 7, you probably need to do this as root for USB device forwarding to work correctly.
+
+    sudo vagrant up
 
 The first time the VM is started, all tools will be downloaded, and the latest version of the code will be grabbed from github.  The process takes about 15 minutes, depending on the speed of your internet connection or computer.
 
 Then, you can log onto the virtual machine by running:
 
     vagrant ssh
+
+_NOTE:_ If you are on macOS and using Virtualbox 7, again you need to do this as root
+
+    sudo vagrant ssh
 
 Once in the virtual machine, you can try, for example, to compile Clouds' bootloader and code:
 
@@ -81,8 +89,7 @@ To pass through USB devices from your real machine to the virtual machine, consu
 ### Using a different programmer
 To use a programmer other than the default (AVR ISP mkII, ARM-USB-OCD-H) it is no longer necessary to edit the makefiles. Instead, the programmer can be set in the shell for the current session, e.g.
 
-	export PGM_INTERFACE=stlink-v2
-	export PGM_INTERFACE_TYPE=hla
+	export PGM_INTERFACE=stlink
 
 for ARM projects using a JTAG adapter. Similarly for AVR projects, you can use
 
