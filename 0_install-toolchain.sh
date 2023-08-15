@@ -29,7 +29,7 @@ sudo modprobe ftdi_sio vendor=0x0403 product=0x6001
 # Install basic development tools
 sudo dpkg --add-architecture i386
 sudo apt-get update -qq
-sudo apt-get install -y build-essential autotools-dev autoconf pkg-config libusb-1.0-0 libusb-1.0-0-dev libftdi1 libftdi-dev git libc6:i386 libncurses5:i386 libstdc++6:i386 cowsay figlet language-pack-en
+sudo apt-get install -y build-essential autotools-dev autoconf cmake pkg-config libusb-1.0-0 libusb-1.0-0-dev libftdi1 libftdi-dev git libc6:i386 libncurses5:i386 libstdc++6:i386 cowsay figlet language-pack-en
 sudo locale-gen UTF-8
 
 # Install python
@@ -44,28 +44,27 @@ sudo ln -s /usr /usr/local/CrossPack-AVR
 
 # Install openocd
 cd /home/vagrant
-wget -nv https://downloads.sourceforge.net/project/openocd/openocd/0.11.0/openocd-0.11.0.tar.gz --no-check-certificate
-tar xfz openocd-0.11.0.tar.gz
-cd openocd-0.11.0
+wget -nv https://downloads.sourceforge.net/project/openocd/openocd/0.12.0/openocd-0.12.0.tar.gz --no-check-certificate
+tar xfz openocd-0.12.0.tar.gz
+cd openocd-0.12.0
 ./configure --enable-ftdi --enable-stlink
 make
 sudo make install
 cd /home/vagrant
-rm -rf openocd-0.11.0
+rm -rf openocd-0.12.0
 rm *.tar.gz
 
 # Install stlink
 cd /home/vagrant
-wget -nv https://github.com/texane/stlink/archive/v1.1.0.tar.gz --no-check-certificate
-tar xfz v1.1.0.tar.gz
-cd stlink-1.1.0
-./autogen.sh
-./configure
-make
+wget -nv --output-document stlink-develop.tar.gz https://github.com/stlink-org/stlink/archive/refs/heads/develop.tar.gz --no-check-certificate
+tar xfz stlink-develop.tar.gz
+cd stlink-develop
+make release
 sudo make install
-sudo cp 49-stlink*.rules /etc/udev/rules.d/
+sudo cp config/udev/rules.d/49-stlink*.rules /etc/udev/rules.d/
+sudo ldconfig
 cd /home/vagrant
-rm -rf stlink-1.1.0
+rm -rf stlink-develop
 rm *.tar.gz
 
 # Allow non-root users to access USB devices such as Atmel AVR and Olimex

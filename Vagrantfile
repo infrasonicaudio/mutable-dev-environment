@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/jammy64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -54,6 +54,8 @@ Vagrant.configure(2) do |config|
    vb.customize ['modifyvm', :id, '--usbehci', 'on']
    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLink', '--vendorid', '0x0483', '--productid', '0x3748']
    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLINK-V3', '--vendorid', '0x0483', '--productid', '0x3753']
+   vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLINK-V3-MINI', '--vendorid', '0x0483', '--productid', '0x374E']
+   vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLINK-V3-MINIE', '--vendorid', '0x0483', '--productid', '0x3754']
    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Olimex OpenOCD JTAG ARM-USB-TINY-H', '--vendorid', '0x15BA', '--productid', '0x002a']
    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Olimex OpenOCD JTAG ARM-USB-OCD-H', '--vendorid', '0x15BA', '--productid', '0x002b']
    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Olimex OpenOCD JTAG', '--vendorid', '0x15BA', '--productid', '0x0003']
