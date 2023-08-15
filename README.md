@@ -9,15 +9,15 @@ This configuration file and this shellscript create a Linux (ubuntu) virtual mac
 
 ## Requirements
 
-* [VirtualBox 5.x](https://www.virtualbox.org/wiki/Downloads)
+* [VirtualBox 7.x](https://www.virtualbox.org/wiki/Downloads)
 * [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 
-The Extension pack consists of a file with the `vbox-extpack` extension.  On windows, double click on it.  On OS X or Linux, the file needs to be installed from the command line with the command:
+The Extension pack consists of a file with the `vbox-extpack` extension.  On windows or macOS double click on it.  On Linux, the file needs to be installed from the command line with the command:
 
     VBoxManage extpack install <filename>
 
-_2023 Note: You can just double click the file to install on macOS_
+_2023 Note: You can just double click the file to install on macOS, you don't need to use the CLI_
 
 Finally if you are running a Linux operating system you will want to add your user to the `vboxusers` group so that the virtual machine can access your USB devices.  Run the following command:
 
